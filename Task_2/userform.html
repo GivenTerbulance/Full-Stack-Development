@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Application Form</title>
+</head>
+<script>
+    function validateform(){
+        var name = document.forms["myform"]["name"].value;
+        var email = document.forms["myform"]["email"].value;
+        var phone = document.forms["myform"]["phone"].value;
+        var ID_number = document.forms["myform"]["ID_number"].value;
+
+        if(name == null || name ==""){
+            alert("Name can not be blank");
+            return false;
+        }
+        else if(email == null || email ==""){
+            alert("Email can not be blank");
+            return false;
+        }
+        else if(phone == null || phone ==""){
+            alert("Phone can not be blank");
+            return false;
+        }else if(phone.length<10){  
+            alert("Phone number must be 10 characters long.");  
+            return false; 
+        }else if(ID_number == null || ID_number ==""){
+            alert("ID_number can not be blank");
+            return false;
+        }else if(ID_number.length<13 || ID_number.length>13){  
+            alert("ID number must be 13 characters long.");  
+            return false; 
+        }
+}   
+</script>
+<body>
+    <h2>Application Form</h2>
+    <form name="myform" action="/submit" method="POST" action="abc.jsp"   onsubmit="return validateform()">
+    <fieldset>
+        <legend>Personal Information:</legend>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="name..." required><br><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="email..."  required><br><br>
+
+        <label for="ID_number">ID number:</label>
+        <input type="text" id="ID_number" name="ID_number" placeholder="identity..." required><br><br>
+
+        <label for="countryCode">Country Code:</label>
+        <select id="countryCode">
+        <option value="+1">+1 (USA)</option>
+        <option value="+44">+44 (UK)</option>
+        <option value="+91">+91 (India)</option>
+        <option value="+27">+27 (South Africa)</option>
+        </select>
+
+<label for="phone">Cellphone Number:</label>
+<input type="tel" id="phone" name="phone" placeholder="Enter number">
+
+
+        <label for="gender">Gender:</label>
+        <select id="gender" name="gender">
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br><br>
+        <p>Were you part of any internship before ?</p>
+        <input type="radio" id="yes" name="internship" value="yes">
+        <label for="yes">Yes</label><br>
+        <input type="radio" id="no" name="internship" value="no">
+        <label for="no">No</label><br><br>
+        <p>Which internship program were you part of ?</p>
+        <input list="Internship" name="Internship">
+          <datalist id="Internship">
+            <option value="Web Development">
+            <option value="Data Science">
+            <option value="Cyber Security">
+            <option value="Digital Marketing">
+            <option value="UI/UX Design">
+          </datalist><br><br>
+         <p>Which program would you like to apply for ?</p>
+         <input list="Programs" name="Programs">
+          <datalist id="Programs">
+            <option value="Web Development">
+            <option value="Data Science">
+            <option value="Cyber Security">
+            <option value="Digital Marketing">
+            <option value="UI/UX Design">
+          </datalist><br><br>
+        
+
+        <label for="message">Motivation of interest:</label><br>
+        <textarea id="message" name="message" rows="4" cols="30" placeholder="some text..." required>
+        </textarea><br><br>
+
+        <input type="submit" value="Submit">
+    </fieldset>
+    </form>
+</body>
+</html>
+

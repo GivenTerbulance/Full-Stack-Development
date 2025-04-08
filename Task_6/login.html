@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+</head>
+<body>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://th.bing.com/th/id/OIP.NZyjtWTaBs24I3qY9_jzZwAAAA?rs=1&pid=ImgDetMain');
+      background-color: #ededed;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    #loginForm {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    #loginForm input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    #loginForm input:focus {
+      border-color: #5b9bd5;
+      outline: none;
+    }
+
+    #loginForm button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #loginForm button:hover {
+      background-color: #0056b3;
+    }
+
+    h2 {
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+  </style>
+</head>
+<body>
+  <form id="loginForm">
+    <h2>Login</h2>
+    <input type="text" name="name" placeholder="Enter your name" required>
+    <input type="email" name="password" placeholder="Enter your password" required>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", async function (event) {
+      event.preventDefault(); // Prevent page refresh
+
+      const formData = new FormData(this);
+      const formObject = {};
+      formData.forEach((value, key) => (formObject[key] = value));
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(formObject)
+        });
+
+        const data = await response.json();
+        if (data.success) {
+          alert("Login successful!");
+          // Redirect to a dashboard or home page
+          window.location.href = '/dashboard'; 
+        } else {
+          alert("Invalid credentials.");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+      }
+    });
+  </script>
+</body>
+</html>
